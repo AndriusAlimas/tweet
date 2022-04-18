@@ -45,14 +45,26 @@ function outputTweets(data) {
         let divCarouselItem = document.createElement("div");
         divCarouselItem.classList.add("carousel-item");
         if (item.extended_entities.media.length > 0) {
+          let link = document.createElement("a");
+          console.log(item.extended_entities.media[i].display_url);
+          link.setAttribute(
+            "href",
+            item.extended_entities.media[i].expanded_url
+          );
+
           let img = document.createElement("img");
+          img.setAttribute(
+            "title",
+            item.extended_entities.media[i].expanded_url
+          );
           img.classList.add("d-block");
           img.classList.add("w-100");
           img.setAttribute(
             "src",
             `${item.extended_entities.media[i].media_url}`
           );
-          divCarouselItem.appendChild(img);
+          link.appendChild(img);
+          divCarouselItem.appendChild(link);
           divCarouselItem.appendChild(carouselCaption);
           carouselInnerOutput.appendChild(divCarouselItem);
           document
