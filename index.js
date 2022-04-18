@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const port = process.env.PORT || 3000;
 const twit = require("twit");
 require("dotenv").config();
 console.log(process.env);
@@ -30,4 +31,4 @@ app.get("/tweets/:search", function (req, res) {
   );
 });
 
-app.listen(3000);
+app.listen(port, () => console.log(`Listening on port ${port}`));
