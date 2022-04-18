@@ -1,9 +1,9 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const port = process.env.PORT || 3000;
 const twit = require("twit");
 require("dotenv").config();
+const port = process.env.PORT || 3000;
 console.log(process.env);
 const T = new twit({
   consumer_key: process.env.Api_key,
