@@ -1,116 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tweet</title>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <!-- link bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- link my style -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
     <header>
-        <h1 class="text-center">Twitter Search App</h1>
+      <h1 class="text-center">Twitter Search App</h1>
     </header>
-    <main  >
-        <div class="App d-flex justify-content-center align-items-center p-3">
-             <img class="searchManImg" src="./img/searchMan.png" />
-         <input type="search" id="search" value="" placeholder="Search for images..." class="form-control">
+    <!-- MAIN BODY -->
+    <main>
+      <div class="App d-flex justify-content-center align-items-center p-3">
+        <img class="searchManImg" src="./img/searchMan.png" />
+        <input
+          type="search"
+          id="search"
+          value=""
+          placeholder="Search for images..."
+          class="form-control"
+        />
 
-         <input id="getTweets" class="searchButton" type="image" src="./img/Twitter-button.png" />
+        <input
+          id="getTweets"
+          class="searchButton"
+          type="image"
+          src="./img/Twitter-button.png"
+        />
+      </div>
+      <div class="d-flex justify-content-center p-3">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="searchBy"
+            id="radioByPerson"
+          />
+          <label class="form-check-label" for="radioByPerson">
+            By Person
+          </label>
         </div>
-        
-  
-   <div id="output" class="d-flex flex-wrap">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="searchBy"
+            id="radioByTag"
+            checked
+          />
+          <label class="form-check-label" for="radioByTag"> By Tag </label>
+        </div>
+      </div>
 
-   </div>
-   <!-- <div id="carouselOutput" class="carousel slide" data-bs-ride="carousel">
-         <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselOutput" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselOutput" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselOutput" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-   </div> -->
+      <!-- Carousel -->
+      <div
+        id="carouselOutput"
+        class="carousel carousel-dark slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner" id="carouselInnerOutput"></div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselOutput"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselOutput"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </main>
-  
-  <script>
-   
-      const search = document.getElementById("search");
-      const getTweets = document.getElementById("getTweets");
-      const output = document.getElementById("output");
-      getTweets.addEventListener('click',getAllTweets);
-// ********************   FUNCTIONS *********************
-         function getAllTweets(){
-          const url = "/tweets/" + search.value;
-          
-          fetch(url).then((response)=>response.json()
-    ).then((data)=>{
-        console.log(data)
-       
-        outputTweets(data.statuses)
-    }).catch((error)=>{
-        // console.log(JSON.stringify(error))
-    })
-      }
-
-    function outputTweets(data){
-        console.log("data: ", data);
-        
-        output.innerHTML = "";
-  
-  
-        data.map((item,index)=> {
-            
-             console.log(item);
-    if(item['extended_entities'] != undefined){
-console.log(item.extended_entities.media)
- let user = item.user.name;
- for(let i = 0 ; i < item.extended_entities.media.length; i++){
-    let div = document.createElement("div"); 
-    let image = document.createElement("img");
-    let span = document.createElement("span");
-    span.innerHTML = user;
-                   image.setAttribute("src",`${item.extended_entities.media[i].media_url}`);
-                  div.appendChild(image);
-                  div.appendChild(span);
-                  output.appendChild(div);
- }
- 
-    }
-
-             
-            // if(item.extended_entities.media.length > 0){
-            //      let image = document.createElement("img");
-            //       image.setAttribute("src",`${item.extended_entities.media[0].media_url}`);
-            //       output.appendChild(image);
-            // }else{
-            //     console.log("No images")
-            // }
-           
-           
-            // console.log(output)
-        });
-
-    }   
-  </script> 
-</body>
+    <script src="./js/tweets.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
